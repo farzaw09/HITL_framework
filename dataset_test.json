@@ -1,0 +1,1292 @@
+ [
+  {
+    "chunk_id": "001_c001",
+    "article_id": "001",
+    "text": "pengenalan: Gangguan Kebimbangan Sosial, Gangguan Kebimbangan Umum, Gangguan Panik dan lain-lain. Gangguan kecemasan adalah tahap kebimbangan yang lebih melampau yang dialami oleh penghidap sehingga menjejaskan keupayaan mereka untuk berfungsi secara negatif (kerja, sekolah, sosial dan aktiviti harian yang lain. Mereka sering mengalami kesukaran dalam mengawal kebimbangan mereka yang turut menjejaskan kualiti hidup dan tidur mereka. Ia juga boleh melumpuhkan penghidap gangguan kecemasan yang menjejaskan keupayaan mereka untuk bekerja dan belajar. simptom: Berlebihan & sukar mengawal kebimbangan Kegelisahan dan ketegangan Insomnia Gejala fizikal – sakit kepala, ketidakselesaan dada, berdebar-debar (jantung berlumba), sakit dan sakit, cirit-birit, gastrik, pening, hipertensi Keupayaan terjejas untuk menumpukan perhatian dan fokus Mengelakkan situasi yang menakutkan yang akan mengehadkan keupayaan seseorang untuk berfungsi Punca: Pelbagai faktor Rawatan: Kedua-dua ubat dan kaunseling atau psikoterapi Pengimejan otak berfungsi telah menunjukkan bahawa otak hiperaktif di pusat perjuangan atau penerbangan (Amygdala) dan ubat antidepresan boleh membantu mengurangkan gejala ini. Komplikasi: Kebimbangan juga boleh menyebabkan kemurungan dan kedua-duanya boleh menyebabkan ketidakupayaan pada seseorang.",
+    "entities": [
+      {
+        "text": "Gangguan Kebimbangan Sosial",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Gangguan Kebimbangan Umum",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Gangguan Panik",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "gangguan kecemasan",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "kemurungan",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "ubat dan kaunseling atau psikoterapi",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "ubat antidepresan",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Berlebihan & sukar mengawal kebimbangan",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Kegelisahan dan ketegangan",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Insomnia",
+        "label": "GEJALA"
+      },
+      {
+        "text": "sakit kepala",
+        "label": "GEJALA"
+      },
+      {
+        "text": "ketidakselesaan dada",
+        "label": "GEJALA"
+      },
+      {
+        "text": "berdebar-debar (jantung berlumba)",
+        "label": "GEJALA"
+      },
+      {
+        "text": "sakit dan sakit",
+        "label": "GEJALA"
+      },
+      {
+        "text": "cirit-birit",
+        "label": "GEJALA"
+      },
+      {
+        "text": "gastrik",
+        "label": "GEJALA"
+      },
+      {
+        "text": "pening",
+        "label": "GEJALA"
+      },
+      {
+        "text": "hipertensi",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Mengelakkan situasi yang menakutkan",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Pelbagai faktor",
+        "label": "PUNCA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "Berlebihan & sukar mengawal kebimbangan"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "Kegelisahan dan ketegangan"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "Insomnia"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "sakit kepala"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "ketidakselesaan dada"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "berdebar-debar (jantung berlumba)"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "sakit dan sakit"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "cirit-birit"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "gastrik"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "pening"
+      },
+      {
+        "head": "Gangguan Kebimbangan Sosial",
+        "relation": "adaGejala",
+        "tail": "hipertensi"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "Berlebihan & sukar mengawal kebimbangan"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "Kegelisahan dan ketegangan"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "Insomnia"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "sakit kepala"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "ketidakselesaan dada"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "berdebar-debar (jantung berlumba)"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "sakit dan sakit"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "cirit-birit"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "gastrik"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "pening"
+      },
+      {
+        "head": "Gangguan Kebimbangan Umum",
+        "relation": "adaGejala",
+        "tail": "hipertensi"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "Berlebihan & sukar mengawal kebimbangan"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "Kegelisahan dan ketegangan"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "Insomnia"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "sakit kepala"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "ketidakselesaan dada"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "berdebar-debar (jantung berlumba)"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "sakit dan sakit"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "cirit-birit"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "gastrik"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "pening"
+      },
+      {
+        "head": "Gangguan Panik",
+        "relation": "adaGejala",
+        "tail": "hipertensi"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "punca",
+        "tail": "Pelbagai faktor"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "rawatanDgn",
+        "tail": "ubat dan kaunseling atau psikoterapi"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "Berlebihan & sukar mengawal kebimbangan"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "Kegelisahan dan ketegangan"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "Insomnia"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "sakit kepala"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "ketidakselesaan dada"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "berdebar-debar (jantung berlumba)"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "sakit dan sakit"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "cirit-birit"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "gastrik"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "pening"
+      },
+      {
+        "head": "gangguan kecemasan",
+        "relation": "adaGejala",
+        "tail": "hipertensi"
+      },
+      {
+        "head": "kemurungan",
+        "relation": "punca",
+        "tail": "Gangguan Kebimbangan Sosial"
+      },
+      {
+        "head": "kemurungan",
+        "relation": "punca",
+        "tail": "Gangguan Kebimbangan Umum"
+      },
+      {
+        "head": "kemurungan",
+        "relation": "punca",
+        "tail": "Gangguan Panik"
+      }
+    ]
+  },
+  {
+    "chunk_id": "002_c001",
+    "article_id": "002",
+    "text": "Apakah Pendarahan di GI Atas/Bawah?: Pendarahan gastrousus (GI) menggambarkan sebarang pendarahan yang berlaku dalam saluran gastrousus. Saluran gastrousus memanjang dari mulut ke dubur. Pendarahan gastrousus selalunya merupakan tanda gangguan dalam saluran penghadaman anda. Tahap pendarahan berkisar dari ringan hingga besar dan mengancam nyawa. Punca pendarahan Gastrointestinal selalunya sukar untuk ditentukan, tetapi perkembangan teknik pengimejan lanjutan membolehkan lokasi pendarahan ditentukan. Pendarahan boleh berasal dari mana-mana tapak dalam saluran Gastrointestinal, tetapi ia dibahagikan kepada: Pendarahan Gastrointestinal Atas yang boleh berlaku di antara mulut dan duodenum (bahagian pertama usus kecil) Pendarahan Gastrointestinal Bawah yang boleh berlaku di antara usus kecil dan dubur 1 Punca Punca: Pendarahan Gastrointestinal Atas terutamanya disebabkan oleh: Ulser peptik (luka terbuka pada lapisan bahagian atas Gastrointestinal) yang boleh melemahkan arteri dan menyebabkan pendarahan yang cepat Pecah urat yang membesar dalam esofagus (disebabkan oleh Sirosis Hati) Koyak pada lapisan esofagus (Mallory-Weiss Syndrome) yang disebabkan oleh penyalahgunaan alkohol dan Gastroenteritis. Pendarahan Gastrointestinal Bawah disebabkan oleh: Tumor benigna (bukan kanser). Kanser kolorektal Buasir Keradangan Keradangan kolon termasuk Kolitis Ulseratif atau Penyakit Crohn Polip (pertumbuhan jinak pada lapisan kolon atau rektum) 2 Gejala simptom: Gejala-gejala pendarahan gastrousus bergantung pada tempat pendarahan dan ia termasuk: Najis gelap Rasa letih dan sesak nafas Mencari darah dalam najis anda Mengalami sakit dada Hilang kesedaran akibat aliran darah yang tidak mencukupi ke otak Muntah darah Muntah yang menyerupai serbuk kopi 3 Rawatan Rawatan: Rawatan pendarahan gastrousus termasuk: Endoskopi, iaitu prosedur yang digunakan untuk mendiagnosis dan merawat Gastrointestinal dengan menghentikan pendarahan dengan memotong saluran pendarahan.",
+    "entities": [
+      {
+        "text": "penyalahgunaan alkohol",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Gastroenteritis",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Pendarahan gastrousus",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Sirosis Hati",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Kanser kolorektal",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Kolitis Ulseratif",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Penyakit Crohn",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Endoskopi",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "najis gelap",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Rasa letih dan sesak nafas",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Mencari darah dalam najis anda",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Mengalami sakit dada",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Hilang kesedaran akibat aliran darah yang tidak mencukupi ke otak",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Muntah darah",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Muntah yang menyerupai serbuk kopi",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Ulser peptik",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Pecah urat yang membesar dalam esofagus",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Koyak pada lapisan esofagus (Mallory-Weiss Syndrome)",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Tumor benigna",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Keradangan kolon termasuk Kolitis Ulseratif atau Penyakit Crohn",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Polip",
+        "label": "PUNCA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "Ulser peptik",
+        "relation": "punca",
+        "tail": "Pendarahan gastrousus"
+      },
+      {
+        "head": "Pecah urat yang membesar dalam esofagus",
+        "relation": "punca",
+        "tail": "Pendarahan gastrousus"
+      },
+      {
+        "head": "Koyak pada lapisan esofagus (Mallory-Weiss Syndrome)",
+        "relation": "punca",
+        "tail": "Pendarahan gastrousus"
+      },
+      {
+        "head": "Tumor benigna",
+        "relation": "punca",
+        "tail": "Pendarahan gastrousus"
+      },
+      {
+        "head": "Keradangan kolon termasuk Kolitis Ulseratif atau Penyakit Crohn",
+        "relation": "punca",
+        "tail": "Pendarahan gastrousus"
+      },
+      {
+        "head": "Polip",
+        "relation": "punca",
+        "tail": "Pendarahan gastrousus"
+      },
+      {
+        "head": "penyalahgunaan alkohol",
+        "relation": "adaRisiko",
+        "tail": "Koyak pada lapisan esofagus (Mallory-Weiss Syndrome)"
+      },
+      {
+        "head": "Gastroenteritis",
+        "relation": "adaRisiko",
+        "tail": "Koyak pada lapisan esofagus (Mallory-Weiss Syndrome)"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "najis gelap"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "Rasa letih dan sesak nafas"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "Mencari darah dalam najis anda"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "Mengalami sakit dada"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "Hilang kesedaran akibat aliran darah yang tidak mencukupi ke otak"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "Muntah darah"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "adaGejala",
+        "tail": "Muntah yang menyerupai serbuk kopi"
+      },
+      {
+        "head": "Pendarahan gastrousus",
+        "relation": "rawatanDgn",
+        "tail": "Endoskopi"
+      }
+    ]
+  },
+  {
+    "chunk_id": "002_c002",
+    "article_id": "002",
+    "text": "Prosedur ini menggunakan instrumen khas dengan lampiran kamera dan laser. Merawat punca pendarahan jika ia boleh dikenal pasti: Buasir boleh dirawat dengan ubat atau, dalam kes yang teruk, dengan pembedahan Jangkitan boleh dirawat dengan antibiotik yang sesuai Terapi perencat pam proton boleh digunakan untuk mengurangkan rembesan asid gastrik dan menggalakkan penyembuhan lesi pendarahan",
+    "entities": [
+      {
+        "text": "Buasir",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Jangkitan",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "ubat",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "pembedahan",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "antibiotik yang sesuai",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Terapi perencat pam proton",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "pendarahan",
+        "label": "PUNCA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "Buasir",
+        "relation": "rawatanDgn",
+        "tail": "ubat"
+      },
+      {
+        "head": "Buasir",
+        "relation": "rawatanDgn",
+        "tail": "pembedahan"
+      },
+      {
+        "head": "Jangkitan",
+        "relation": "rawatanDgn",
+        "tail": "antibiotik yang sesuai"
+      }
+    ]
+  },
+  {
+    "chunk_id": "003_c001",
+    "article_id": "003",
+    "text": "Apakah Tundukan Lutut (Genu Varum)?: Tunduk Lutut adalah kelengkungan luar lutut yang mengakibatkan kaki 'tunduk'. Penampilannya paling jelas antara umur 12 dan 18 bulan. Ia boleh berlaku pada satu atau kedua-dua lutut. 1 Punca Punca: Tunduk pada lutut biasanya disebabkan oleh: Penyakit Blount (masalah dengan perkembangan plat pertumbuhan di bahagian dalam lutut) Jangkitan atau kecederaan sebelumnya Rakhitis Keadaan ini boleh berkembang secara spontan pada remaja yang berlebihan berat badan yang sebelum ini mempunyai kaki lurus. 2 Gejala simptom: Gejala termasuk: Jurang yang jelas antara lutut apabila berdiri dengan kaki bersama Selalunya tiada rasa sakit Memburukkan kecacatan dengan masa jika tidak dirawat 3 Rawatan Rawatan: Rawatan pembedahan termasuk: Potongan pada tulang untuk penjajaran semula (Osteotomi). Mereka mungkin diperlukan untuk remaja yang lebih tua yang telah berhenti membesar. Penambat sementara plat pertumbuhan luar biasa pada lutut pada anak yang lebih muda atau penambat kekal pada anak yang lebih tua 4 Komplikasi dan Penyakit Berkaitan Komplikasi dan Penyakit Berkaitan: Tunduk pada lutut remaja mungkin menyakitkan. Komplikasi yang kadang-kadang dilihat selepas pembedahan termasuk: Sindrom petak (peningkatan tekanan dalam petak otot) Gangguan pertumbuhan. Jangkitan Kecacatan berulang Tunduk lutut yang tidak dirawat boleh menyebabkan sakit pada bahagian medial lutut dan arthritis semasa dewasa.",
+    "entities": [
+      {
+        "text": "Tundukan Lutut",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Genu Varum",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Penyakit Blount",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Rakhitis",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "arthritis",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Potongan pada tulang untuk penjajaran semula (Osteotomi)",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Penambat sementara plat pertumbuhan luar biasa pada lutut pada anak yang lebih muda",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "penambat kekal pada anak yang lebih tua",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "kelengkungan luar lutut yang mengakibatkan kaki 'tunduk'",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Jurang yang jelas antara lutut apabila berdiri dengan kaki bersama",
+        "label": "GEJALA"
+      },
+      {
+        "text": "tiada rasa sakit",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Memburukkan kecacatan dengan masa jika tidak dirawat",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Penyakit Blount",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Jangkitan atau kecederaan sebelumnya",
+        "label": "PUNCA"
+      },
+      {
+        "text": "Rakhitis",
+        "label": "PUNCA"
+      },
+      {
+        "text": "berlebihan berat badan yang sebelum ini mempunyai kaki lurus",
+        "label": "PUNCA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "Tundukan Lutut",
+        "relation": "adaGejala",
+        "tail": "kelengkungan luar lutut yang mengakibatkan kaki 'tunduk'"
+      },
+      {
+        "head": "Tundukan Lutut",
+        "relation": "adaGejala",
+        "tail": "Jurang yang jelas antara lutut apabila berdiri dengan kaki bersama"
+      },
+      {
+        "head": "Tundukan Lutut",
+        "relation": "adaGejala",
+        "tail": "tiada rasa sakit"
+      },
+      {
+        "head": "Tundukan Lutut",
+        "relation": "adaGejala",
+        "tail": "Memburukkan kecacatan dengan masa jika tidak dirawat"
+      },
+      {
+        "head": "Penyakit Blount",
+        "relation": "punca",
+        "tail": "Tundukan Lutut"
+      },
+      {
+        "head": "Jangkitan atau kecederaan sebelumnya",
+        "relation": "punca",
+        "tail": "Tundukan Lutut"
+      },
+      {
+        "head": "Rakhitis",
+        "relation": "punca",
+        "tail": "Tundukan Lutut"
+      },
+      {
+        "head": "berlebihan berat badan yang sebelum ini mempunyai kaki lurus",
+        "relation": "punca",
+        "tail": "Tundukan Lutut"
+      },
+      {
+        "head": "Tundukan Lutut",
+        "relation": "rawatanDgn",
+        "tail": "Potongan pada tulang untuk penjajaran semula (Osteotomi)"
+      },
+      {
+        "head": "Tundukan Lutut",
+        "relation": "rawatanDgn",
+        "tail": "Penambat sementara plat pertumbuhan luar biasa pada lutut pada anak yang lebih muda"
+      },
+      {
+        "head": "Tundukan Lutut",
+        "relation": "rawatanDgn",
+        "tail": "penambat kekal pada anak yang lebih tua"
+      }
+    ]
+  },
+  {
+    "chunk_id": "004_c001",
+    "article_id": "004",
+    "text": "Apakah itu aneurisme otak?: Aneurisme otak ialah \"gelembung\" yang berlaku di dinding arteri di dalam otak yang boleh diisi dengan darah dan akhirnya pecah, yang berpotensi menyebabkan kerosakan serius pada sel-sel otak di sekelilingnya. Aneurisme otak biasanya menjejaskan arteri otak utama yang berjalan di bawah otak dan pangkal tengkorak. Walaupun sesiapa sahaja boleh mengalami aneurisme otak, risiko pecah aneurisme meningkat pada orang yang berumur lebih dari 40 tahun, dengan wanita berisiko lebih besar daripada lelaki. 1 Punca Punca: Aneurisma otak berkembang pada dinding arteri yang lemah atau rosak, walaupun puncanya masih belum difahami sepenuhnya. Ia boleh menjadi proses degenerasi, di mana faktor seperti peningkatan usia dan tekanan darah tinggi memainkan peranan penting. Ia juga sering dikaitkan dengan aterosklerosis, penyakit saluran darah yang menyebabkan arteri mengeras akibat pengumpulan mendapan lemak di bahagian dalam dinding arteri. Aneurisme otak biasanya berlaku pada orang yang mengalami gangguan genetik tertentu termasuk gangguan tisu penghubung dan penyakit polikistik penyakit buah pinggang. Sesetengah penyakit peredaran, seperti kecacatan arteriovenous, juga boleh menyebabkan aneurisma otak. Punca lain termasuk pengambilan alkohol dan dadah yang berlebihan, kecederaan kepala, jangkitan, dan tumor. 2 Gejala simptom: Gejala Anemia termasuk: Sakit dada Masalah kognitif Tangan dan kaki sejuk Degupan jantung yang cepat atau tidak teratur Keletihan dan pening sakit kepala Kulit pucat Sesak nafas 3 Rawatan Rawatan: Aneurisma otak perlu dirawat segera untuk mengelakkan akibat yang membawa maut. Matlamat rawatan berikut adalah untuk menghentikan aneurisme daripada pecah, atau untuk mengelakkan pendarahan jika aneurisme telah pecah: Prosedur Pintasan - Ini digunakan untuk mengalihkan laluan darah di sekitar bahagian arteri yang tersumbat (dilakukan pada masa yang sama dengan prosedur oklusi).",
+    "entities": [
+      {
+        "text": "umur lebih dari 40 tahun",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "wanita",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "aneurisme otak",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "penyakit saluran darah",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "gangguan tisu penghubung",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "polikistik penyakit buah pinggang",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "kecacatan arteriovenous",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Prosedur Pintasan",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "penglihatan kabur",
+        "label": "GEJALA"
+      },
+      {
+        "text": "sakit mata",
+        "label": "GEJALA"
+      },
+      {
+        "text": "kerosakan serius pada sel-sel otak di sekelilingnya",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Masalah kognitif",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Tangan dan kaki sejuk",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Degupan jantung yang cepat atau tidak teratur",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Keletihan",
+        "label": "GEJALA"
+      },
+      {
+        "text": "pening sakit kepala",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Kulit pucat",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Sesak nafas",
+        "label": "GEJALA"
+      },
+      {
+        "text": "dinding arteri yang lemah atau rosak",
+        "label": "PUNCA"
+      },
+      {
+        "text": "proses degenerasi",
+        "label": "PUNCA"
+      },
+      {
+        "text": "peningkatan usia",
+        "label": "PUNCA"
+      },
+      {
+        "text": "tekanan darah tinggi",
+        "label": "PUNCA"
+      },
+      {
+        "text": "aterosklerosis",
+        "label": "PUNCA"
+      },
+      {
+        "text": "pengambilan alkohol dan dadah yang berlebihan",
+        "label": "PUNCA"
+      },
+      {
+        "text": "kecederaan kepala",
+        "label": "PUNCA"
+      },
+      {
+        "text": "jangkitan",
+        "label": "PUNCA"
+      },
+      {
+        "text": "tumor",
+        "label": "PUNCA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "aneurisme otak",
+        "relation": "adaGejala",
+        "tail": "kerosakan serius pada sel-sel otak di sekelilingnya"
+      },
+      {
+        "head": "dinding arteri yang lemah atau rosak",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "proses degenerasi",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "peningkatan usia",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "tekanan darah tinggi",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "aterosklerosis",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "pengambilan alkohol dan dadah yang berlebihan",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "kecederaan kepala",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "jangkitan",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "tumor",
+        "relation": "punca",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "umur lebih dari 40 tahun",
+        "relation": "adaRisiko",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "wanita",
+        "relation": "adaRisiko",
+        "tail": "aneurisme otak"
+      },
+      {
+        "head": "aneurisme otak",
+        "relation": "rawatanDgn",
+        "tail": "Prosedur Pintasan"
+      }
+    ]
+  },
+  {
+    "chunk_id": "004_c002",
+    "article_id": "004",
+    "text": "Prosedur Endovaskular - Kateter dimasukkan dari pangkal paha dan bergerak ke arah arteri otak yang terjejas. Gegelung platinum dilepaskan ke dalam aneurisme untuk mendorong pembentukan bekuan darah. Keratan mikrosurgikal - Pakar bedah meletakkan klip di sekeliling aneurisme yang membonjol untuk memotong bekalan darahnya dan mengelakkan pendarahan selanjutnya. Oklusi - Prosedur pembedahan terbuka ini menyekat aliran darah ke aneurisme melalui arteri.",
+    "entities": [
+      {
+        "text": "aneurisme",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Endovaskular",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Kateter dimasukkan dari pangkal paha dan bergerak ke arah arteri otak yang terjejas",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Gegelung platinum dilepaskan ke dalam aneurisme untuk mendorong pembentukan bekuan darah",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Keratan mikrosurgikal - Pakar bedah meletakkan klip di sekeliling aneurisme yang membonjol untuk memotong bekalan darahnya dan mengelakkan pendarahan selanjutnya",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Oklusi - Prosedur pembedahan terbuka ini menyekat aliran darah ke aneurisme melalui arteri",
+        "label": "RAWATAN"
+      }
+    ],
+    "relations": [
+      {
+        "head": "aneurisme",
+        "relation": "rawatanDgn",
+        "tail": "Endovaskular"
+      },
+      {
+        "head": "aneurisme",
+        "relation": "rawatanDgn",
+        "tail": "Kateter dimasukkan dari pangkal paha dan bergerak ke arah arteri otak yang terjejas"
+      },
+      {
+        "head": "aneurisme",
+        "relation": "rawatanDgn",
+        "tail": "Gegelung platinum dilepaskan ke dalam aneurisme untuk mendorong pembentukan bekuan darah"
+      },
+      {
+        "head": "aneurisme",
+        "relation": "rawatanDgn",
+        "tail": "Keratan mikrosurgikal - Pakar bedah meletakkan klip di sekeliling aneurisme yang membonjol untuk memotong bekalan darahnya dan mengelakkan pendarahan selanjutnya"
+      },
+      {
+        "head": "aneurisme",
+        "relation": "rawatanDgn",
+        "tail": "Oklusi - Prosedur pembedahan terbuka ini menyekat aliran darah ke aneurisme melalui arteri"
+      }
+    ]
+  },
+  {
+    "chunk_id": "005_c001",
+    "article_id": "005",
+    "text": "Apakah Penyakit Arteri Karotid?: Arteri karotid anda ialah sepasang saluran darah yang terletak di dalam leher yang menghantar darah ke otak dan kepala anda. Penyakit Arteri Karotid terhasil daripada pengumpulan mendapan berlilin, dipanggil plak, di atas permukaan dalaman arteri. Plak ini akhirnya boleh mengurangkan atau menyekat bekalan darah ke otak anda dan boleh menyebabkan strok atau Transient Ischemic Attack (TIA), juga dikenali sebagai \"mini-stroke\", yang berlaku apabila bekuan darah menghalang arteri yang membekalkan darah ke otak buat sementara waktu. Penyakit Arteri Karotid bertanggungjawab untuk 20%-30% daripada semua strok. Rawatan Penyakit Arteri Karotid mungkin termasuk gabungan perubahan gaya hidup, ubat-ubatan dan dalam beberapa kes pembedahan. 1 Punca Punca: Penyebab Penyakit Arteri Karotid termasuk: Sebab yang boleh diubah suai Keadaan termasuk obesiti, diabetes, tekanan darah tinggi dan kolesterol tinggi, yang boleh meningkatkan risiko penyakit arteri karotid Merokok, kurang bersenam dan diet yang tidak sihat Sebab yang tidak boleh diubah suai Umur (wanita yang berumur lebih dari 75 tahun mempunyai risiko yang lebih besar daripada lelaki dalam kumpulan umur yang sama, dan lelaki yang berumur kurang daripada 75 tahun lebih terdedah kepada penyakit arteri karotid berbanding wanita dalam kumpulan umur yang sama) Sejarah keluarga penyakit ini Mereka yang menghidap Penyakit Arteri Koronari (pengerasan arteri yang membekalkan darah ke jantung) lebih terdedah kepada penyakit Arteri Karotid. 2 Gejala simptom: Penyakit Arteri karotid mungkin tidak menyebabkan gejala. Pengumpulan plak boleh tanpa disedari dan boleh mengakibatkan TIA.",
+    "entities": [
+      {
+        "text": "obesiti",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "diabetes",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "tekanan darah tinggi",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "kolesterol tinggi",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Merokok",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "kurang bersenam",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "diet yang tidak sihat",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Umur (wanita yang berumur lebih dari 75 tahun mempunyai risiko yang lebih besar daripada lelaki dalam kumpulan umur yang sama, dan lelaki yang berumur kurang daripada 75 tahun lebih terdedah kepada penyakit arteri karotid berbanding wanita dalam kumpulan umur yang sama)",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Sejarah keluarga penyakit ini",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Penyakit Arteri Koronari",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "Penyakit Arteri Karotid",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "strok",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Transient Ischemic Attack (TIA)",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "obesiti",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "diabetes",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "tekanan darah tinggi",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "kolesterol tinggi",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Penyakit Arteri Koronari",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "perubahan gaya hidup",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "ubat-ubatan",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "pembedahan",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "penglihatan kabur",
+        "label": "GEJALA"
+      },
+      {
+        "text": "sakit mata",
+        "label": "GEJALA"
+      },
+      {
+        "text": "pengumpulan mendapan berlilin",
+        "label": "PUNCA"
+      },
+      {
+        "text": "plak",
+        "label": "PUNCA"
+      },
+      {
+        "text": "bekuan darah",
+        "label": "PUNCA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "obesiti",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "diabetes",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "tekanan darah tinggi",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "kolesterol tinggi",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "Merokok",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "kurang bersenam",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "diet yang tidak sihat",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "Umur (wanita yang berumur lebih dari 75 tahun mempunyai risiko yang lebih besar daripada lelaki dalam kumpulan umur yang sama, dan lelaki yang berumur kurang daripada 75 tahun lebih terdedah kepada penyakit arteri karotid berbanding wanita dalam kumpulan umur yang sama)",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "Sejarah keluarga penyakit ini",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "Penyakit Arteri Koronari",
+        "relation": "adaRisiko",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "pengumpulan mendapan berlilin",
+        "relation": "punca",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "plak",
+        "relation": "punca",
+        "tail": "Penyakit Arteri Karotid"
+      },
+      {
+        "head": "bekuan darah",
+        "relation": "punca",
+        "tail": "strok"
+      },
+      {
+        "head": "pengumpulan mendapan berlilin",
+        "relation": "punca",
+        "tail": "plak"
+      },
+      {
+        "head": "Penyakit Arteri Karotid",
+        "relation": "rawatanDgn",
+        "tail": "perubahan gaya hidup"
+      },
+      {
+        "head": "Penyakit Arteri Karotid",
+        "relation": "rawatanDgn",
+        "tail": "ubat-ubatan"
+      },
+      {
+        "head": "Penyakit Arteri Karotid",
+        "relation": "rawatanDgn",
+        "tail": "pembedahan"
+      }
+    ]
+  },
+  {
+    "chunk_id": "005_c002",
+    "article_id": "005",
+    "text": "Jika anda mengalami TIA, peluang anda untuk mengalami strok meningkat sebanyak 10 kali ganda. Gejala TIA adalah sementara (mungkin berlangsung beberapa minit hingga beberapa jam), dan ia termasuk mana-mana yang berikut: Kesukaran menelan Kesukaran bercakap Kebas, kesemutan atau lemah pada sebelah muka atau huraian-dalam, atau pada sebelah tangan atau kaki. Pening atau kekeliruan secara tiba-tiba Kurang koordinasi, keseimbangan dan kesukaran berjalan secara tiba-tiba Hilang secara tiba-tiba atau penglihatan kabur Sakit kepala yang teruk secara tiba-tiba Adalah penting untuk anda mendapatkan bantuan kecemasan untuk menerima rawatan segera bagi mengelakkan perkembangan kepada strok. 3 Rawatan Rawatan: Doktor anda akan menilai keadaan anda dan berbincang dengan anda tentang pilihan rawatan yang sesuai untuk anda. Ini mungkin termasuk gabungan: Perubahan gaya hidup: Hadkan penggunaan alkohol Kekalkan pemakanan yang sihat Mengekalkan kawalan tekanan darah, diabetes dan penyakit jantung yang lain Berhenti merokok Lakukan senaman yang kerap Ubat untuk mengurangkan risiko strok dan komplikasi penyakit jantung lain, serta ubat pelarut beku Pembedahan untuk membuka sekatan arteri dan mencegah strok pada masa hadapan 4 Komplikasi dan Penyakit Berkaitan Komplikasi dan Penyakit Berkaitan: Strok adalah komplikasi penyakit arteri karotid yang paling biasa. Strok boleh menyebabkan Kematian Kelemahan otot dan lumpuh Kerosakan otak kekal",
+    "entities": [
+      {
+        "text": "penggunaan alkohol",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "pemakanan yang sihat",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "tekanan darah",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "diabetes",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "penyakit jantung",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "merokok",
+        "label": "FAKTOR_RISIKO"
+      },
+      {
+        "text": "TIA",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "strok",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "penyakit jantung",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "diabetes",
+        "label": "PENYAKIT"
+      },
+      {
+        "text": "Perubahan gaya hidup: Hadkan penggunaan alkohol",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Mengekalkan pemakanan yang sihat",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Mengekalkan kawalan tekanan darah, diabetes dan penyakit jantung yang lain",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Berhenti merokok",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Lakukan senaman yang kerap",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Ubat untuk mengurangkan risiko strok dan komplikasi penyakit jantung lain, serta ubat pelarut beku",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Pembedahan untuk membuka sekatan arteri",
+        "label": "RAWATAN"
+      },
+      {
+        "text": "Kesukaran menelan",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Kesukaran bercakap",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Kebas, kesemutan atau lemah pada sebelah muka atau huraian-dalam, atau pada sebelah tangan atau kaki",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Pening atau kekeliruan secara tiba-tiba",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Kurang koordinasi, keseimbangan dan kesukaran berjalan secara tiba-tiba",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Hilang secara tiba-tiba atau penglihatan kabur",
+        "label": "GEJALA"
+      },
+      {
+        "text": "Sakit kepala yang teruk secara tiba-tiba",
+        "label": "GEJALA"
+      }
+    ],
+    "relations": [
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Kesukaran menelan"
+      },
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Kesukaran bercakap"
+      },
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Kebas, kesemutan atau lemah pada sebelah muka atau huraian-dalam, atau pada sebelah tangan atau kaki"
+      },
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Pening atau kekeliruan secara tiba-tiba"
+      },
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Kurang koordinasi, keseimbangan dan kesukaran berjalan secara tiba-tiba"
+      },
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Hilang secara tiba-tiba atau penglihatan kabur"
+      },
+      {
+        "head": "TIA",
+        "relation": "adaGejala",
+        "tail": "Sakit kepala yang teruk secara tiba-tiba"
+      },
+      {
+        "head": "penggunaan alkohol",
+        "relation": "adaRisiko",
+        "tail": "strok"
+      },
+      {
+        "head": "tekanan darah",
+        "relation": "adaRisiko",
+        "tail": "strok"
+      },
+      {
+        "head": "diabetes",
+        "relation": "adaRisiko",
+        "tail": "strok"
+      },
+      {
+        "head": "penyakit jantung",
+        "relation": "adaRisiko",
+        "tail": "strok"
+      },
+      {
+        "head": "merokok",
+        "relation": "adaRisiko",
+        "tail": "strok"
+      }
+    ]
+  }
+]
