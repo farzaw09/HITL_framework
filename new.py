@@ -20,7 +20,25 @@ DATASET_FILE = "llm_validations.xlsx"
 
 if "data" not in st.session_state:
 
-    df = pd.read_excel(DATASET_FILE)
+    try:
+        df = pd.read_excel(DATASET_FILE)
+
+    except Exception as e:
+        st.error(f"Error loading Excel file: {e}")
+        st.stop()
+
+    # CLEAN COLUMN NAMES
+    df.columns = df.columns.str.strip()
+
+    # OPTIONAL DEBUG
+    st.write("Detected Columns:")
+    st.write(df.columns.tolist())
+
+    # RENAME COLUMN
+    if "Score (1–5)" in df.columns:
+        df = df.rename(columns={
+            "Score (1–5)": "Score"
+        })
 
     # SELECT ONLY 10 ARTICLES
     selected_articles = [
@@ -28,9 +46,16 @@ if "data" not in st.session_state:
         "098", "119", "146", "200", "244"
     ]
 
+    # FORMAT ARTICLE IDs
     df["Article ID"] = df["Article ID"].astype(str).str.zfill(3)
 
+    # FILTER ARTICLES
     df = df[df["Article ID"].isin(selected_articles)]
+
+    # CHECK EMPTY
+    if df.empty:
+        st.error("No matching articles found.")
+        st.stop()
 
     # ADD REVIEW COLUMNS
     if "expert_decision" not in df.columns:
@@ -117,7 +142,7 @@ st.write("### Comments")
 st.write(sample.get("Comments", ""))
 
 st.write("### Score")
-st.write(sample.get("Score (1–5)", ""))
+st.write(sample.get("Score", ""))
 
 # =========================
 # DOMAIN EXPERT REVIEW
@@ -153,13 +178,14 @@ if st.button("Save Review"):
     st.success("Review saved!")
 
 # =========================
-# DOWNLOAD REVIEW RESULTS
+# DOWNLOAD RESULTS
 # =========================
 
 st.write("## Download Results")
 
 final_df = pd.DataFrame(st.session_state.data)
 
+# JSON DOWNLOAD
 json_data = final_df.to_json(
     orient="records",
     force_ascii=False,
@@ -173,11 +199,12 @@ st.download_button(
     mime="application/json"
 )
 
-excel_buffer = final_df.to_csv(index=False).encode("utf-8")
+# CSV DOWNLOAD
+csv_data = final_df.to_csv(index=False).encode("utf-8")
 
 st.download_button(
     label="Download CSV Results",
-    data=excel_buffer,
+    data=csv_data,
     file_name="domain_expert_review.csv",
     mime="text/csv"
 )
