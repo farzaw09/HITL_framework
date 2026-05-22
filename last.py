@@ -151,23 +151,52 @@ st.write("## LLM Evaluation Output")
 
 st.metric("Score", val.get("Score", ""))
 
-st.write("### Correct Entities")
-st.write(val.get("Correct Entities", ""))
+import pandas as pd
 
-st.write("### Wrong Entities")
-st.write(val.get("Wrong Entities", ""))
+# Build structured table
+validation_table = pd.DataFrame([
+    ["Correct Entities", val.get("Correct Entities", "")],
+    ["Wrong Entities", val.get("Wrong Entities", "")],
+    ["Missing Entities", val.get("Missing Entities", "")],
+    ["Correct Relations", val.get("Correct Relations", "")],
+    ["Wrong Relations", val.get("Wrong Relations", "")],
+    ["Missing Relations", val.get("Missing Relations", "")],
+    ["Comments", val.get("Comments", "")]
+], columns=["Category", "Value"])
 
-st.write("### Missing Entities")
-st.write(val.get("Missing Entities", ""))
+st.table(validation_table)
 
-st.write("### Correct Relations")
-st.write(val.get("Correct Relations", ""))
+# =========================
+# DOMAIN EXPERT EVALUATION
+# =========================
 
-st.write("### Wrong Relations")
-st.write(val.get("Wrong Relations", ""))
+st.write("## Domain Expert Evaluation (Meta-Validation)")
 
-st.write("### Missing Relations")
-st.write(val.get("Missing Relations", ""))
+ner_check = st.radio(
+    "Is LLM NER evaluation correct?",
+    ["Yes", "No"],
+    key=f"ner_{idx}"
+)
 
-st.write("### Comments")
-st.write(val.get("Comments", ""))
+re_check = st.radio(
+    "Is LLM RE evaluation correct?",
+    ["Yes", "No"],
+    key=f"re_{idx}"
+)
+
+confidence = st.slider(
+    "Confidence level",
+    1, 5,
+    key=f"conf_{idx}"
+)
+
+expert_comment = st.text_area(
+    "Expert comment",
+    key=f"comment_{idx}"
+)
+
+# SAVE INTO SESSION
+sample["expert_ner_check"] = ner_check
+sample["expert_re_check"] = re_check
+sample["expert_confidence"] = confidence
+sample["expert_comment"] = expert_comment
