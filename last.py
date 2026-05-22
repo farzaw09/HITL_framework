@@ -20,7 +20,7 @@ selected_articles = [
 # =========================
 
 JSON_FILE = "Final_dataset.json"
-EXCEL_FILE = "LLM Performance Evaluation.xlsx"
+EXCEL_FILE = "10_samples.xlsx"
 
 if "data" not in st.session_state:
 
