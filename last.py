@@ -6,25 +6,19 @@ import re
 st.set_page_config(layout="wide")
 st.title("HITL: Extraction vs LLM Validation Review Tool")
 
-# =========================
-# SELECTED ARTICLES ONLY
-# =========================
-
+#10 samples only
 selected_articles = [
-    "001", "010", "018", "050", "077",
-    "098", "119", "146", "200", "244"
+    "001", "012", "025", "068", "091",
+    "127", "143", "182", "193", "244"
 ]
 
-# =========================
 # LOAD DATA
-# =========================
-
 JSON_FILE = "Final_dataset.json"
 EXCEL_FILE = "10_samples.xlsx"
 
 if "data" not in st.session_state:
 
-    # -------- LOAD EXTRACTION --------
+    # LOAD EXTRACTION 
     with open(JSON_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -33,7 +27,7 @@ if "data" not in st.session_state:
         if str(d.get("article_id", "")).zfill(3) in selected_articles
     ]
 
-    # -------- LOAD VALIDATION --------
+    # LOAD VALIDATION -
     df = pd.read_excel(EXCEL_FILE)
     df.columns = df.columns.str.strip()
 
@@ -45,7 +39,7 @@ if "data" not in st.session_state:
 
     validation_dict = df.set_index("Article ID").to_dict(orient="index")
 
-    # -------- MERGE --------
+    # MERGE 
     for d in data:
         aid = str(d.get("article_id", "")).zfill(3)
         d["validation"] = validation_dict.get(aid, {})
@@ -53,10 +47,7 @@ if "data" not in st.session_state:
     st.session_state.data = data
 
 
-# =========================
 # SELECT SAMPLE
-# =========================
-
 display_idx = st.number_input(
     "Select Sample",
     min_value=1,
@@ -70,10 +61,7 @@ val = sample.get("validation", {})
 
 st.markdown(f"## Article {sample.get('article_id')}")
 
-# =========================
-# FULL ARTICLE VIEW (NO HIGHLIGHT)
-# =========================
-
+# FULL ARTICLE VIEW 
 article_ids = sorted(list(set([d.get("article_id") for d in st.session_state.data])))
 
 if st.checkbox("Show full article context"):
@@ -91,9 +79,8 @@ if st.checkbox("Show full article context"):
         for c in article_chunks:
             st.markdown(f"[{c.get('chunk_id')}] {c.get('text','')}")
 
-# =========================
+
 # CURRENT CHUNK TEXT (HIGHLIGHTED)
-# =========================
 
 st.write("## Current Chunk Text")
 
@@ -129,9 +116,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# =========================
-# LLM EXTRACTION (HIDEABLE)
-# =========================
+# LLM EXTRACTION 
 
 st.write("## LLM Extraction (Ollama)")
 
@@ -143,11 +128,8 @@ with st.expander("RE Extraction", expanded=True):
     for r in sample.get("relations", []):
         st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
 
-# =========================
 # LLM VALIDATION OUTPUT
-# =========================
-
-st.write("## LLM Evaluation Output")
+st.write("## LLM Notebook Evaluation Output")
 
 st.metric("Score", val.get("Score", ""))
 
@@ -166,37 +148,55 @@ validation_table = pd.DataFrame([
 
 st.table(validation_table)
 
-# =========================
 # DOMAIN EXPERT EVALUATION
-# =========================
+st.write("## Domain Expert Validation")
 
-st.write("## Domain Expert Evaluation (Meta-Validation)")
+categories = [
+    "Correct Entities",
+    "Wrong Entities",
+    "Missing Entities",
+    "Correct Relations",
+    "Wrong Relations",
+    "Missing Relations",
+    "Overall Evaluation"
+]
 
-ner_check = st.radio(
-    "Is LLM NER evaluation correct?",
-    ["Yes", "No"],
-    key=f"ner_{idx}"
+expert_results = []
+
+for cat in categories:
+
+    st.write(f"### {cat}")
+
+    col1, col2 = st.columns([1, 3])
+
+    with col1:
+        decision = st.selectbox(
+            "Decision",
+            ["Agree", "Partial", "Reject"],
+            key=f"{cat}_decision_{idx}"
+        )
+
+    with col2:
+        note = st.text_input(
+            "Notes",
+            key=f"{cat}_note_{idx}"
+        )
+
+    expert_results.append({
+        "Category": cat,
+        "Decision": decision,
+        "Notes": note
+    })
+
+# SCORE
+overall_score = st.slider(
+    "Overall Score",
+    1,
+    5,
+    4,
+    key=f"overall_score_{idx}"
 )
 
-re_check = st.radio(
-    "Is LLM RE evaluation correct?",
-    ["Yes", "No"],
-    key=f"re_{idx}"
-)
-
-confidence = st.slider(
-    "Confidence level",
-    1, 5,
-    key=f"conf_{idx}"
-)
-
-expert_comment = st.text_area(
-    "Expert comment",
-    key=f"comment_{idx}"
-)
-
-# SAVE INTO SESSION
-sample["expert_ner_check"] = ner_check
-sample["expert_re_check"] = re_check
-sample["expert_confidence"] = confidence
-sample["expert_comment"] = expert_comment
+# SAVE TO SESSION
+sample["expert_validation"] = expert_results
+sample["overall_score"] = overall_score
