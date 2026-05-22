@@ -3,7 +3,16 @@ import pandas as pd
 import json
 
 st.set_page_config(layout="wide")
-st.title("HITL: Extraction vs Validation Comparison Tool")
+st.title("HITL: Extraction vs Validation (Selected Articles Only)")
+
+# =========================
+# SELECTED ARTICLES
+# =========================
+
+selected_articles = [
+    "001", "010", "018", "050", "077",
+    "098", "119", "146", "200", "244"
+]
 
 # =========================
 # LOAD EXTRACTION (JSON)
@@ -14,32 +23,33 @@ EXCEL_FILE = "llm_validations.xlsx"
 
 if "data" not in st.session_state:
 
-    # extraction data
     with open(JSON_FILE, "r", encoding="utf-8") as f:
         extraction_data = json.load(f)
 
-    # validation data
+    # FILTER JSON (ONLY selected articles)
+    extraction_data = [
+        x for x in extraction_data
+        if str(x.get("article_id", "")).zfill(3) in selected_articles
+    ]
+
+    # LOAD VALIDATION (EXCEL)
     df = pd.read_excel(EXCEL_FILE)
     df.columns = df.columns.str.strip()
 
     if "Score (1–5)" in df.columns:
         df = df.rename(columns={"Score (1–5)": "Score"})
 
-    selected_articles = [
-        "001", "010", "018", "050", "077",
-        "098", "119", "146", "200", "244"
-    ]
-
     df["Article ID"] = df["Article ID"].astype(str).str.zfill(3)
+
     df = df[df["Article ID"].isin(selected_articles)]
 
     validation_dict = df.set_index("Article ID").to_dict(orient="index")
 
-    # MERGE BOTH
+    # MERGE ONLY SELECTED
     merged = []
 
     for item in extraction_data:
-        aid = item.get("article_id", "").zfill(3)
+        aid = str(item.get("article_id", "")).zfill(3)
 
         item["validation"] = validation_dict.get(aid, {})
 
@@ -49,18 +59,17 @@ if "data" not in st.session_state:
 
 
 # =========================
-# SELECT SAMPLE
+# SELECT SAMPLE (ONLY 10)
 # =========================
 
 idx = st.number_input(
-    "Select Sample",
-    1,
-    len(st.session_state.data),
-    1
+    "Select Sample (Selected Articles Only)",
+    min_value=1,
+    max_value=len(st.session_state.data),
+    value=1
 ) - 1
 
 sample = st.session_state.data[idx]
-
 val = sample.get("validation", {})
 
 st.markdown(f"## Article {sample.get('article_id')}")
