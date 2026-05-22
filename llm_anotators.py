@@ -14,7 +14,7 @@ st.warning("⚠️ Download backup regularly after review session.")
 # =========================
 
 JSON_FILE = "Final_dataset.json"
-EXCEL_FILE = "10_samples.xlsx"
+EXCEL_FILE = "LLM_10samples.xlsx"
 SAVE_FILE = "expert_progress.json"
 
 # =========================
@@ -22,8 +22,8 @@ SAVE_FILE = "expert_progress.json"
 # =========================
 
 selected_articles = [
-    "001", "012", "025", "068", "091",
-    "127", "143", "182", "193", "244"
+    "001", "002", "004", "012", "025",
+    "034", "068", "110", "182", "244"
 ]
 
 # =========================
