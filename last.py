@@ -1,12 +1,13 @@
 import streamlit as st
 import pandas as pd
 import json
+import re
 
 st.set_page_config(layout="wide")
 st.title("HITL: Extraction vs Validation Review Tool")
 
 # =========================
-# SELECTED ARTICLES
+# SELECTED ARTICLES ONLY
 # =========================
 
 selected_articles = [
@@ -23,16 +24,16 @@ EXCEL_FILE = "llm_validations.xlsx"
 
 if "data" not in st.session_state:
 
-    # -------- LOAD EXTRACTION --------
+    # -------- extraction --------
     with open(JSON_FILE, "r", encoding="utf-8") as f:
-        extraction_data = json.load(f)
+        data = json.load(f)
 
-    extraction_data = [
-        x for x in extraction_data
-        if str(x.get("article_id", "")).zfill(3) in selected_articles
+    data = [
+        d for d in data
+        if str(d.get("article_id", "")).zfill(3) in selected_articles
     ]
 
-    # -------- LOAD VALIDATION --------
+    # -------- validation --------
     df = pd.read_excel(EXCEL_FILE)
     df.columns = df.columns.str.strip()
 
@@ -42,99 +43,116 @@ if "data" not in st.session_state:
     df["Article ID"] = df["Article ID"].astype(str).str.zfill(3)
     df = df[df["Article ID"].isin(selected_articles)]
 
-    validation_dict = df.set_index("Article ID").to_dict(orient="index")
+    val_dict = df.set_index("Article ID").to_dict(orient="index")
 
-    # -------- MERGE --------
-    merged = []
-    for item in extraction_data:
-        aid = str(item.get("article_id", "")).zfill(3)
-        item["validation"] = validation_dict.get(aid, {})
-        merged.append(item)
+    # -------- merge --------
+    for d in data:
+        aid = str(d.get("article_id", "")).zfill(3)
+        d["validation"] = val_dict.get(aid, {})
 
-    st.session_state.data = merged
+    st.session_state.data = data
 
 
 # =========================
 # SELECT SAMPLE
 # =========================
 
-idx = st.number_input(
-    "Select Article",
+display_idx = st.number_input(
+    "Select Sample",
     min_value=1,
     max_value=len(st.session_state.data),
     value=1
-) - 1
+)
 
+idx = display_idx - 1
 sample = st.session_state.data[idx]
 val = sample.get("validation", {})
 
-st.markdown(f"## Article {sample.get('article_id')}")
+st.markdown(f"### Sample {display_idx}")
+st.markdown(f"Article ID: `{sample.get('article_id')}`")
 
-# ======================================================
-# 🟩 FULL ARTICLE VIEW (COLLAPSIBLE)
-# ======================================================
+# =========================
+# ARTICLE VIEW (KEEP ORIGINAL STYLE)
+# =========================
 
-with st.expander("📄 Show Full Article Context", expanded=False):
+article_ids = sorted(list(set([d.get("article_id") for d in st.session_state.data])))
 
-    st.write(sample.get("text", "No text available"))
+if st.checkbox("Show full article"):
 
-# ======================================================
-# 🟨 LLM EXTRACTION (NER + RE)
-# ======================================================
+    selected_article = st.selectbox("Select Article", article_ids)
 
-st.markdown("## 🟨 LLM Extraction (Ollama)")
+    article_chunks = [
+        d for d in st.session_state.data
+        if d.get("article_id") == selected_article
+    ]
 
-col1, col2 = st.columns(2)
+    st.write("### Full Article")
 
-with col1:
-    with st.expander("NER Output", expanded=True):
-        entities = sample.get("entities", [])
-        if entities:
-            for e in entities:
-                st.write(f"- {e.get('text')} → {e.get('label')}")
-        else:
-            st.write("No entities")
+    with st.container(height=300):
+        for c in article_chunks:
 
-with col2:
-    with st.expander("RE Output", expanded=True):
-        relations = sample.get("relations", [])
-        if relations:
-            for r in relations:
-                st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
-        else:
-            st.write("No relations")
+            text = c.get("text", "")
 
-# ======================================================
-# 🟦 LLM VALIDATION OUTPUT
-# ======================================================
+            # highlight entities (SAME AS YOUR ORIGINAL LOGIC)
+            entities = c.get("entities", [])
+            color = "yellow"
 
-st.markdown("## 🟦 LLM Validation Output")
+            for ent in entities:
+                if ent.get("text"):
+                    pattern = re.escape(ent["text"])
+                    text = re.sub(
+                        pattern,
+                        lambda m: f"<mark style='background-color:{color}'>{m.group(0)}</mark>",
+                        text,
+                        flags=re.IGNORECASE
+                    )
+
+            if c["chunk_id"] == sample.get("chunk_id"):
+                st.markdown(f"**[{c['chunk_id']}] {text}**", unsafe_allow_html=True)
+            else:
+                st.markdown(f"[{c['chunk_id']}] {text}", unsafe_allow_html=True)
+
+
+# =========================
+# LLM EXTRACTION (ONLY WHAT YOU SAID)
+# =========================
+
+st.write("## LLM Extraction (Ollama)")
+
+st.write("### NER")
+for e in sample.get("entities", []):
+    st.write(f"- {e.get('text')} → {e.get('label')}")
+
+st.write("### RE")
+for r in sample.get("relations", []):
+    st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
+
+
+# =========================
+# LLM VALIDATION OUTPUT
+# =========================
+
+st.write("## LLM Validation Output")
 
 st.metric("Score", val.get("Score", ""))
 
-with st.expander("Correct Entities", expanded=True):
-    st.write(val.get("Correct Entities", ""))
+st.write("Correct Entities")
+st.write(val.get("Correct Entities", ""))
 
-with st.expander("Wrong Entities", expanded=True):
-    st.write(val.get("Wrong Entities", ""))
+st.write("Wrong Entities")
+st.write(val.get("Wrong Entities", ""))
 
-with st.expander("Missing Entities", expanded=True):
-    st.write(val.get("Missing Entities", ""))
+st.write("Missing Entities")
+st.write(val.get("Missing Entities", ""))
 
-with st.expander("Correct Relations", expanded=True):
-    st.write(val.get("Correct Relations", ""))
+st.write("Correct Relations")
+st.write(val.get("Correct Relations", ""))
 
-with st.expander("Wrong Relations", expanded=True):
-    st.write(val.get("Wrong Relations", ""))
+st.write("Wrong Relations")
+st.write(val.get("Wrong Relations", ""))
 
-with st.expander("Missing Relations", expanded=True):
-    st.write(val.get("Missing Relations", ""))
+st.write("Missing Relations")
+st.write(val.get("Missing Relations", ""))
 
-with st.expander("Comments", expanded=False):
-    st.write(val.get("Comments", ""))
-
-# ======================================================
-# INFO FOOTER
-# ======================================================
-
-st.info("Use expand/collapse sections to focus on specific layers: Context → Extraction → Validation")
+st.write("Comments")
+st.write(val.get("Comments", ""))
