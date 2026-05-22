@@ -9,27 +9,21 @@ st.title("HITL: Extraction vs LLM Validation Review Tool")
 
 st.warning("⚠️ Download backup regularly after review session.")
 
-# =========================
-# FILES
-# =========================
 
+# FILES
 JSON_FILE = "Final_dataset.json"
 EXCEL_FILE = "LLM_10samples.xlsx"
 SAVE_FILE = "expert_progress.json"
 
-# =========================
-# SELECTED ARTICLES
-# =========================
 
+# SELECTED ARTICLES
 selected_articles = [
     "001", "002", "004", "012", "025",
     "034", "068", "110", "182", "244"
 ]
 
-# =========================
-# LOAD DATA
-# =========================
 
+# LOAD DATA
 if "data" not in st.session_state:
 
     # LOAD EXTRACTION
@@ -83,10 +77,8 @@ if "data" not in st.session_state:
     else:
         st.session_state.data = data
 
-# =========================
-# AUTOSAVE
-# =========================
 
+# AUTOSAVE
 def autosave():
 
     tmp = SAVE_FILE + ".tmp"
@@ -101,10 +93,8 @@ def autosave():
 
     os.replace(tmp, SAVE_FILE)
 
-# =========================
-# SELECT SAMPLE
-# =========================
 
+# SELECT SAMPLE
 display_idx = st.number_input(
     "Select Sample",
     min_value=1,
@@ -118,10 +108,8 @@ sample = st.session_state.data[idx]
 
 val = sample.get("validation", {})
 
-# =========================
-# STATUS
-# =========================
 
+# STATUS
 if sample["status"] != "done":
     sample["status"] = "in_progress"
 
@@ -144,16 +132,11 @@ if status == "done":
 elif status == "in_progress":
     st.warning("🟡 IN PROGRESS")
 
-# =========================
 # ARTICLE INFO
-# =========================
-
 st.markdown(f"## Article {sample.get('article_id')}")
 
-# =========================
-# FULL ARTICLE VIEW
-# =========================
 
+# FULL ARTICLE VIEW
 article_ids = sorted(list(set([
     d.get("article_id")
     for d in st.session_state.data
@@ -182,10 +165,8 @@ if st.checkbox("Show full article context"):
                 f"{c.get('text','')}"
             )
 
-# =========================
-# CURRENT CHUNK TEXT
-# =========================
 
+# CURRENT CHUNK TEXT
 st.write("## Current Chunk Text")
 
 def highlight_text(text, entities, status):
@@ -226,10 +207,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# =========================
-# LLM EXTRACTION
-# =========================
 
+# LLM EXTRACTION
 st.write("## LLM Extraction (Ollama)")
 
 with st.expander("NER Extraction", expanded=False):
@@ -271,10 +250,8 @@ with st.expander("RE Extraction", expanded=False):
     else:
         st.write("No relations")
 
-# =========================
-# LLM VALIDATION OUTPUT
-# =========================
 
+# LLM VALIDATION OUTPUT
 st.write("## LLM Notebook Evaluation Output")
 
 st.metric("Score", val.get("Score", ""))
@@ -320,10 +297,8 @@ validation_table = pd.DataFrame([
 
 st.table(validation_table)
 
-# =========================
-# DOMAIN EXPERT VALIDATION
-# =========================
 
+# DOMAIN EXPERT VALIDATION
 st.write("## Domain Expert Validation")
 
 categories = [
@@ -365,10 +340,8 @@ for cat in categories:
         "Notes": note
     })
 
-# =========================
-# OVERALL SCORE
-# =========================
 
+# OVERALL SCORE
 overall_score = st.slider(
     "Overall Expert Score",
     1,
@@ -381,10 +354,8 @@ overall_score = st.slider(
 sample["expert_validation"] = expert_results
 sample["overall_score"] = overall_score
 
-# =========================
-# SAVE BUTTON
-# =========================
 
+# SAVE BUTTON
 if st.button("Save Current Progress"):
 
     st.session_state.data[idx] = sample
@@ -393,10 +364,8 @@ if st.button("Save Current Progress"):
 
     st.success("Progress saved!")
 
-# =========================
-# DONE BUTTON
-# =========================
 
+# DONE BUTTON
 if st.button("Save Sample as DONE"):
 
     sample["status"] = "done"
@@ -407,10 +376,8 @@ if st.button("Save Sample as DONE"):
 
     st.success("Saved as DONE!")
 
-# =========================
-# BACKUP RESTORE
-# =========================
 
+# BACKUP RESTORE
 st.sidebar.header("Backup Restore")
 
 uploaded = st.sidebar.file_uploader(
@@ -426,10 +393,8 @@ if uploaded:
 
     st.sidebar.success("Backup restored!")
 
-# =========================
-# DOWNLOAD BACKUP
-# =========================
 
+# DOWNLOAD BACKUP
 st.sidebar.header("Download Backup")
 
 backup_json = json.dumps(
@@ -445,10 +410,8 @@ st.sidebar.download_button(
     mime="application/json"
 )
 
-# =========================
-# FINAL DOWNLOAD
-# =========================
 
+# FINAL DOWNLOAD
 st.download_button(
     "Download FINAL RESULTS",
     json.dumps(
