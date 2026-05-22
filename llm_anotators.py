@@ -275,13 +275,68 @@ sample["overall_score"] = overall_score
 
 # SAVE BUTTON
 if st.button("Save Current Progress"):
+
     st.session_state.data[idx] = sample
+
     autosave()
-    st.success("Saved!")
+
+    st.success("Progress saved!")
+
 
 # DONE BUTTON
 if st.button("Save Sample as DONE"):
+
     sample["status"] = "done"
+
     st.session_state.data[idx] = sample
+
     autosave()
+
     st.success("Saved as DONE!")
+
+
+# BACKUP RESTORE
+st.sidebar.header("Backup Restore")
+
+uploaded = st.sidebar.file_uploader(
+    "Upload backup JSON",
+    type=["json"]
+)
+
+if uploaded:
+
+    restored_data = json.load(uploaded)
+
+    st.session_state.data = restored_data
+
+    st.sidebar.success("Backup restored!")
+
+
+# DOWNLOAD BACKUP
+st.sidebar.header("Download Backup")
+
+backup_json = json.dumps(
+    st.session_state.data,
+    indent=2,
+    ensure_ascii=False
+)
+
+st.sidebar.download_button(
+    "Download Progress Backup",
+    data=backup_json,
+    file_name="domain_expert_progress.json",
+    mime="application/json"
+)
+
+
+# FINAL DOWNLOAD
+st.download_button(
+    "Download FINAL RESULTS",
+    json.dumps(
+        st.session_state.data,
+        indent=2,
+        ensure_ascii=False
+    ),
+    file_name="final_domain_expert_results.json",
+    mime="application/json"
+)
