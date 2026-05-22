@@ -408,12 +408,31 @@ if st.button("Save Sample as DONE"):
     st.success("Saved as DONE!")
 
 # =========================
+# BACKUP RESTORE
+# =========================
+
+st.sidebar.header("Backup Restore")
+
+uploaded = st.sidebar.file_uploader(
+    "Upload backup JSON",
+    type=["json"]
+)
+
+if uploaded:
+
+    restored_data = json.load(uploaded)
+
+    st.session_state.data = restored_data
+
+    st.sidebar.success("Backup restored!")
+
+# =========================
 # DOWNLOAD BACKUP
 # =========================
 
-st.sidebar.subheader("Download Backup")
+st.sidebar.header("Download Backup")
 
-backup = json.dumps(
+backup_json = json.dumps(
     st.session_state.data,
     indent=2,
     ensure_ascii=False
@@ -421,8 +440,8 @@ backup = json.dumps(
 
 st.sidebar.download_button(
     "Download Progress Backup",
-    backup,
-    file_name="expert_review_backup.json",
+    data=backup_json,
+    file_name="domain_expert_progress.json",
     mime="application/json"
 )
 
