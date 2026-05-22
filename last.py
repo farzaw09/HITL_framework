@@ -1,35 +1,52 @@
 import streamlit as st
+import pandas as pd
 import json
-import os
-import copy
-import re
 
 st.set_page_config(layout="wide")
-st.title("LLM Extraction vs LLM Validation Review Tool")
-
-st.warning("⚠️ Viewing tool: Compare LLM extraction with LLM validation output")
+st.title("HITL: Extraction vs Validation Comparison Tool")
 
 # =========================
-# FILES
+# LOAD EXTRACTION (JSON)
 # =========================
 
-DATASET_FILE = "Final_dataset.json"
-SAVE_FILE = "progress.json"
-
-# =========================
-# LOAD DATA
-# =========================
+JSON_FILE = "Final_dataset.json"
+EXCEL_FILE = "llm_validations.xlsx"
 
 if "data" not in st.session_state:
 
-    if os.path.exists(SAVE_FILE):
-        with open(SAVE_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-    else:
-        with open(DATASET_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
+    # extraction data
+    with open(JSON_FILE, "r", encoding="utf-8") as f:
+        extraction_data = json.load(f)
 
-    st.session_state.data = copy.deepcopy(data)
+    # validation data
+    df = pd.read_excel(EXCEL_FILE)
+    df.columns = df.columns.str.strip()
+
+    if "Score (1–5)" in df.columns:
+        df = df.rename(columns={"Score (1–5)": "Score"})
+
+    selected_articles = [
+        "001", "010", "018", "050", "077",
+        "098", "119", "146", "200", "244"
+    ]
+
+    df["Article ID"] = df["Article ID"].astype(str).str.zfill(3)
+    df = df[df["Article ID"].isin(selected_articles)]
+
+    validation_dict = df.set_index("Article ID").to_dict(orient="index")
+
+    # MERGE BOTH
+    merged = []
+
+    for item in extraction_data:
+        aid = item.get("article_id", "").zfill(3)
+
+        item["validation"] = validation_dict.get(aid, {})
+
+        merged.append(item)
+
+    st.session_state.data = merged
+
 
 # =========================
 # SELECT SAMPLE
@@ -37,104 +54,65 @@ if "data" not in st.session_state:
 
 idx = st.number_input(
     "Select Sample",
-    min_value=1,
-    max_value=len(st.session_state.data),
-    value=1
+    1,
+    len(st.session_state.data),
+    1
 ) - 1
 
 sample = st.session_state.data[idx]
 
-st.markdown(f"## Article {sample.get('article_id', 'N/A')}")
+val = sample.get("validation", {})
+
+st.markdown(f"## Article {sample.get('article_id')}")
 
 # =========================
-# 1. ORIGINAL TEXT
+# ORIGINAL TEXT
 # =========================
 
 st.write("## 🟩 Original Text")
+st.write(sample.get("text", ""))
 
-def highlight(text, entities):
-    if not entities:
-        return text
-
-    for e in entities:
-        if not e.get("text"):
-            continue
-
-        pattern = re.escape(e["text"])
-
-        def repl(m):
-            return f"<mark style='background-color:yellow'>{m.group(0)}</mark>"
-
-        text = re.sub(pattern, repl, text, flags=re.IGNORECASE)
-
-    return text
-
-
-st.markdown(
-    highlight(sample.get("text", ""), sample.get("entities", [])),
-    unsafe_allow_html=True
-)
 
 # =========================
-# 2. LLM EXTRACTION (OLLAMA)
+# LLM EXTRACTION
 # =========================
 
 st.write("## 🟨 LLM Extraction (Ollama)")
 
-with st.expander("NER Extraction"):
-    entities = sample.get("entities", [])
-    if entities:
-        for e in entities:
-            st.write(f"- {e.get('text')} → {e.get('label')}")
-    else:
-        st.write("No entities")
+st.subheader("NER")
+for e in sample.get("entities", []):
+    st.write(f"- {e.get('text')} → {e.get('label')}")
 
-with st.expander("RE Extraction"):
-    relations = sample.get("relations", [])
-    if relations:
-        for r in relations:
-            st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
-    else:
-        st.write("No relations")
+st.subheader("RE")
+for r in sample.get("relations", []):
+    st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
+
 
 # =========================
-# 3. LLM VALIDATION OUTPUT
+# LLM VALIDATION
 # =========================
 
 st.write("## 🟦 LLM Validation Output")
 
-st.metric("Score", sample.get("Score", ""))
+st.metric("Score", val.get("Score", ""))
 
-st.subheader("Correct Entities")
-st.write(sample.get("Correct Entities", ""))
+st.write("Correct Entities")
+st.write(val.get("Correct Entities", ""))
 
-st.subheader("Wrong Entities")
-st.write(sample.get("Wrong Entities", ""))
+st.write("Wrong Entities")
+st.write(val.get("Wrong Entities", ""))
 
-st.subheader("Missing Entities")
-st.write(sample.get("Missing Entities", ""))
+st.write("Missing Entities")
+st.write(val.get("Missing Entities", ""))
 
-st.subheader("Correct Relations")
-st.write(sample.get("Correct Relations", ""))
+st.write("Correct Relations")
+st.write(val.get("Correct Relations", ""))
 
-st.subheader("Wrong Relations")
-st.write(sample.get("Wrong Relations", ""))
+st.write("Wrong Relations")
+st.write(val.get("Wrong Relations", ""))
 
-st.subheader("Missing Relations")
-st.write(sample.get("Missing Relations", ""))
+st.write("Missing Relations")
+st.write(val.get("Missing Relations", ""))
 
-st.subheader("Comments")
-st.write(sample.get("Comments", ""))
-
-# =========================
-# 4. DOMAIN EXPERT VIEW ONLY (NO EDIT)
-# =========================
-
-st.write("## 🧠 Domain Expert View")
-
-st.info(
-    "Check consistency between LLM extraction (Section 2) and LLM validation (Section 3)."
-)
-
-with st.expander("Raw JSON (debug)"):
-    st.json(sample)
+st.write("Comments")
+st.write(val.get("Comments", ""))
