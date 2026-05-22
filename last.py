@@ -24,7 +24,7 @@ EXCEL_FILE = "llm_validations.xlsx"
 
 if "data" not in st.session_state:
 
-    # -------- extraction --------
+    # -------- LOAD EXTRACTION --------
     with open(JSON_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -33,7 +33,7 @@ if "data" not in st.session_state:
         if str(d.get("article_id", "")).zfill(3) in selected_articles
     ]
 
-    # -------- validation --------
+    # -------- LOAD VALIDATION --------
     df = pd.read_excel(EXCEL_FILE)
     df.columns = df.columns.str.strip()
 
@@ -43,12 +43,12 @@ if "data" not in st.session_state:
     df["Article ID"] = df["Article ID"].astype(str).str.zfill(3)
     df = df[df["Article ID"].isin(selected_articles)]
 
-    val_dict = df.set_index("Article ID").to_dict(orient="index")
+    validation_dict = df.set_index("Article ID").to_dict(orient="index")
 
-    # -------- merge --------
+    # -------- MERGE --------
     for d in data:
         aid = str(d.get("article_id", "")).zfill(3)
-        d["validation"] = val_dict.get(aid, {})
+        d["validation"] = validation_dict.get(aid, {})
 
     st.session_state.data = data
 
@@ -72,7 +72,7 @@ st.markdown(f"### Sample {display_idx}")
 st.markdown(f"Article ID: `{sample.get('article_id')}`")
 
 # =========================
-# ARTICLE VIEW (KEEP ORIGINAL STYLE)
+# FULL ARTICLE VIEW (HIDEABLE)
 # =========================
 
 article_ids = sorted(list(set([d.get("article_id") for d in st.session_state.data])))
@@ -92,11 +92,10 @@ if st.checkbox("Show full article"):
         for c in article_chunks:
 
             text = c.get("text", "")
-
-            # highlight entities (SAME AS YOUR ORIGINAL LOGIC)
             entities = c.get("entities", [])
-            color = "yellow"
 
+            # highlight
+            color = "yellow"
             for ent in entities:
                 if ent.get("text"):
                     pattern = re.escape(ent["text"])
@@ -112,21 +111,59 @@ if st.checkbox("Show full article"):
             else:
                 st.markdown(f"[{c['chunk_id']}] {text}", unsafe_allow_html=True)
 
+# =========================
+# TEXT (ALWAYS VISIBLE)
+# =========================
+
+st.write("## Text")
+
+def highlight_text(text, entities, sample_status):
+
+    if not entities:
+        return text
+
+    color = "lightgreen" if sample_status == "done" else "yellow"
+
+    for ent in entities:
+        if not ent.get("text"):
+            continue
+
+        pattern = re.escape(ent["text"])
+
+        text = re.sub(
+            pattern,
+            lambda m: f"<mark style='background-color:{color}'>{m.group(0)}</mark>",
+            text,
+            flags=re.IGNORECASE
+        )
+
+    return text
+
+
+st.markdown(
+    highlight_text(sample.get("text", ""), sample.get("entities", []), sample.get("status")),
+    unsafe_allow_html=True
+)
 
 # =========================
-# LLM EXTRACTION (ONLY WHAT YOU SAID)
+# LLM EXTRACTION (HIDEABLE)
 # =========================
 
 st.write("## LLM Extraction (Ollama)")
 
-st.write("### NER")
-for e in sample.get("entities", []):
-    st.write(f"- {e.get('text')} → {e.get('label')}")
+with st.expander("Show NER Extraction", expanded=True):
+    if sample.get("entities"):
+        for e in sample.get("entities", []):
+            st.write(f"- {e.get('text')} → {e.get('label')}")
+    else:
+        st.write("No entities")
 
-st.write("### RE")
-for r in sample.get("relations", []):
-    st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
-
+with st.expander("Show RE Extraction", expanded=True):
+    if sample.get("relations"):
+        for r in sample.get("relations", []):
+            st.write(f"- {r.get('head')} → {r.get('relation')} → {r.get('tail')}")
+    else:
+        st.write("No relations")
 
 # =========================
 # LLM VALIDATION OUTPUT
