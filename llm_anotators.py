@@ -16,8 +16,8 @@ SAVE_FILE = "expert_progress.json"
 
 # SELECTED ARTICLES
 selected_articles = [
-    "001", "002", "004", "012", "025",
-    "034", "068", "110", "182", "244"
+    "001", "002", "014", "025", "034",
+    "068", "182", "193", "238", "244"
 ]
 
 # LOAD DATA
