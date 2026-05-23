@@ -382,7 +382,7 @@ for cat in categories:
     })
 
 # OVERALL SCORE
-saved_score = sample.get("overall_score", 4)
+saved_score = sample.get("overall_score", 3)
 
 overall_score = st.slider(
     "Overall Expert Score",
