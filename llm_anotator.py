@@ -23,7 +23,6 @@ selected_articles = [
 # LOAD DATA
 if "data" not in st.session_state:
 
-    # LOAD EXTRACTION
     with open(JSON_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -33,27 +32,17 @@ if "data" not in st.session_state:
         in selected_articles
     ]
 
-    # LOAD VALIDATION
     df = pd.read_excel(EXCEL_FILE)
     df.columns = df.columns.str.strip()
 
     if "Score (1–5)" in df.columns:
         df = df.rename(columns={"Score (1–5)": "Score"})
 
-    df["Article ID"] = (
-        df["Article ID"]
-        .astype(str)
-        .str.zfill(3)
-    )
-
-    df["Chunk ID"] = (
-        df["Chunk ID"]
-        .astype(str)
-    )
+    df["Article ID"] = df["Article ID"].astype(str).str.zfill(3)
+    df["Chunk ID"] = df["Chunk ID"].astype(str)
 
     df = df[df["Article ID"].isin(selected_articles)]
 
-    # BUILD VALIDATION DICTIONARY
     validation_dict = {}
 
     for _, row in df.iterrows():
@@ -66,27 +55,16 @@ if "data" not in st.session_state:
 
         validation_dict[aid][cid] = row.to_dict()
 
-    # MERGE VALIDATION INTO DATA
     for d in data:
 
-        aid = str(
-            d.get("article_id", "")
-        ).zfill(3)
+        aid = str(d.get("article_id", "")).zfill(3)
+        cid = str(d.get("chunk_id", ""))
 
-        cid = str(
-            d.get("chunk_id", "")
-        )
-
-        d["validation"] = (
-            validation_dict
-            .get(aid, {})
-            .get(cid, {})
-        )
+        d["validation"] = validation_dict.get(aid, {}).get(cid, {})
 
         if "status" not in d:
             d["status"] = "not_started"
 
-    # RESTORE SAVE FILE
     if os.path.exists(SAVE_FILE):
 
         with open(SAVE_FILE, "r", encoding="utf-8") as f:
@@ -102,13 +80,7 @@ def autosave():
     tmp = SAVE_FILE + ".tmp"
 
     with open(tmp, "w", encoding="utf-8") as f:
-
-        json.dump(
-            st.session_state.data,
-            f,
-            indent=2,
-            ensure_ascii=False
-        )
+        json.dump(st.session_state.data, f, indent=2, ensure_ascii=False)
 
     os.replace(tmp, SAVE_FILE)
 
@@ -122,31 +94,23 @@ display_idx = st.number_input(
 )
 
 idx = display_idx - 1
-
 sample = st.session_state.data[idx]
-
 val = sample.get("validation", {})
 
 # STATUS
 if sample["status"] != "done":
     sample["status"] = "in_progress"
 
-done = len([
-    x for x in st.session_state.data
-    if x.get("status") == "done"
-])
-
+done = len([x for x in st.session_state.data if x.get("status") == "done"])
 total = len(st.session_state.data)
 
 st.progress(done / total if total > 0 else 0)
-
 st.write(f"Progress: {done}/{total} completed")
 
 status = sample.get("status", "not_started")
 
 if status == "done":
     st.success("🟢 COMPLETED")
-
 elif status == "in_progress":
     st.warning("🟡 IN PROGRESS")
 
@@ -155,33 +119,20 @@ st.markdown(f"## Article {sample.get('article_id')}")
 st.markdown(f"Chunk {sample.get('chunk_id')}")
 
 # FULL ARTICLE VIEW
-article_ids = sorted(list(set([
-    d.get("article_id")
-    for d in st.session_state.data
-])))
+article_ids = sorted(list(set([d.get("article_id") for d in st.session_state.data])))
 
 if st.checkbox("Show full article context"):
 
-    selected_article = st.selectbox(
-        "Select Article",
-        article_ids
-    )
+    selected_article = st.selectbox("Select Article", article_ids)
 
     article_chunks = [
         d for d in st.session_state.data
         if d.get("article_id") == selected_article
     ]
 
-    st.write("### Full Article")
-
     with st.container(height=300):
-
         for c in article_chunks:
-
-            st.markdown(
-                f"[{c.get('chunk_id')}] "
-                f"{c.get('text','')}"
-            )
+            st.markdown(f"[{c.get('chunk_id')}] {c.get('text','')}")
 
 # CURRENT CHUNK TEXT
 st.write("## Current Chunk Text")
@@ -191,11 +142,7 @@ def highlight_text(text, entities, status):
     if not entities:
         return text
 
-    color = (
-        "lightgreen"
-        if status == "done"
-        else "yellow"
-    )
+    color = "lightgreen" if status == "done" else "yellow"
 
     for ent in entities:
 
@@ -206,9 +153,7 @@ def highlight_text(text, entities, status):
 
         text = re.sub(
             pattern,
-            lambda m:
-            f"<mark style='background-color:{color}'>"
-            f"{m.group(0)}</mark>",
+            lambda m: f"<mark style='background-color:{color}'>{m.group(0)}</mark>",
             text,
             flags=re.IGNORECASE
         )
@@ -216,53 +161,34 @@ def highlight_text(text, entities, status):
     return text
 
 st.markdown(
-    highlight_text(
-        sample.get("text", ""),
-        sample.get("entities", []),
-        sample.get("status")
-    ),
+    highlight_text(sample.get("text", ""), sample.get("entities", []), sample.get("status")),
     unsafe_allow_html=True
 )
 
 # LLM EXTRACTION
 st.write("## LLM Extraction (Ollama)")
 
-with st.expander("NER Extraction", expanded=False):
+with st.expander("NER Extraction"):
 
     entities = sample.get("entities", [])
 
     if entities:
-
-        ner_df = pd.DataFrame([
-            {
-                "Entity": e.get("text"),
-                "Label": e.get("label")
-            }
+        st.table(pd.DataFrame([
+            {"Entity": e.get("text"), "Label": e.get("label")}
             for e in entities
-        ])
-
-        st.table(ner_df)
-
+        ]))
     else:
         st.write("No entities")
 
-with st.expander("RE Extraction", expanded=False):
+with st.expander("RE Extraction"):
 
     relations = sample.get("relations", [])
 
     if relations:
-
-        re_df = pd.DataFrame([
-            {
-                "Head": r.get("head"),
-                "Relation": r.get("relation"),
-                "Tail": r.get("tail")
-            }
+        st.table(pd.DataFrame([
+            {"Head": r.get("head"), "Relation": r.get("relation"), "Tail": r.get("tail")}
             for r in relations
-        ])
-
-        st.table(re_df)
-
+        ]))
     else:
         st.write("No relations")
 
@@ -272,42 +198,13 @@ st.write("## LLM Notebook Evaluation Output")
 st.metric("Score", val.get("Score", ""))
 
 validation_table = pd.DataFrame([
-
-    [
-        "Correct Entities",
-        val.get("Correct Entities", "")
-    ],
-
-    [
-        "Wrong Entities",
-        val.get("Wrong Entities", "")
-    ],
-
-    [
-        "Missing Entities",
-        val.get("Missing Entities", "")
-    ],
-
-    [
-        "Correct Relations",
-        val.get("Correct Relations", "")
-    ],
-
-    [
-        "Wrong Relations",
-        val.get("Wrong Relations", "")
-    ],
-
-    [
-        "Missing Relations",
-        val.get("Missing Relations", "")
-    ],
-
-    [
-        "Comments",
-        val.get("Comments", "")
-    ]
-
+    ["Correct Entities", val.get("Correct Entities", "")],
+    ["Wrong Entities", val.get("Wrong Entities", "")],
+    ["Missing Entities", val.get("Missing Entities", "")],
+    ["Correct Relations", val.get("Correct Relations", "")],
+    ["Wrong Relations", val.get("Wrong Relations", "")],
+    ["Missing Relations", val.get("Missing Relations", "")],
+    ["Comments", val.get("Comments", "")]
 ], columns=["Category", "LLM Evaluation"])
 
 st.table(validation_table)
@@ -322,10 +219,8 @@ categories = [
     "Correct Relations",
     "Wrong Relations",
     "Missing Relations",
-    "Overall Evaluation"
 ]
 
-# LOAD EXISTING SAVED RESULTS
 saved_results = {}
 
 if "expert_validation" in sample:
@@ -339,33 +234,25 @@ if "expert_validation" in sample:
 
 expert_results = []
 
-# 6 REQUIREMENT CHECKS
-
 for cat in categories:
 
     safe_cat = cat.replace(" ", "_")
 
     st.write(f"### {cat}")
 
-    # DEFAULT VALUES
-    default_decision = saved_results.get(cat, {}).get(
-        "Decision",
-        "Agree"
-    )
-
-    default_note = saved_results.get(cat, {}).get(
-        "Notes",
-        ""
-    )
+    default_decision = saved_results.get(cat, {}).get("Decision", "Agree")
+    default_note = saved_results.get(cat, {}).get("Notes", "")
 
     col1, col2 = st.columns([1, 3])
 
     with col1:
 
+        options = ["Agree", "Partial", "Disagree"]
+
         decision = st.selectbox(
             "Decision",
-            ["Agree", "Partial", "Disagree"],
-            index=["Agree", "Partial", "Disagree"].index(default_decision),
+            options,
+            index=options.index(default_decision) if default_decision in options else 0,
             key=f"{safe_cat}_decision_{idx}"
         )
 
@@ -383,20 +270,12 @@ for cat in categories:
         "Notes": note
     })
 
-
-# OVERALL EVALUATION
-
+# OVERALL SECTION
 st.write("## Overall Evaluation")
 
-overall_default = saved_results.get("Overall Evaluation", {}).get(
-    "Decision",
-    "Accept"
-)
+overall_options = ["Accept", "Partial", "Reject"]
 
-overall_note = saved_results.get("Overall Evaluation", {}).get(
-    "Notes",
-    ""
-)
+overall_default = saved_results.get("Overall Evaluation", {}).get("Decision", "Accept")
 
 col1, col2 = st.columns([1, 3])
 
@@ -404,26 +283,26 @@ with col1:
 
     overall_decision = st.selectbox(
         "Decision",
-        ["Accept", "Partial", "Reject"],
-        index=["Accept", "Partial", "Reject"].index(overall_default),
+        overall_options,
+        index=overall_options.index(overall_default) if overall_default in overall_options else 0,
         key=f"overall_decision_{idx}"
     )
 
 with col2:
 
-    overall_note_input = st.text_input(
+    overall_note = st.text_input(
         "Notes",
-        value=overall_note,
+        value="",
         key=f"overall_note_{idx}"
     )
 
 expert_results.append({
     "Category": "Overall Evaluation",
     "Decision": overall_decision,
-    "Notes": overall_note_input
+    "Notes": overall_note
 })
 
-# OVERALL SCORE
+# SCORE
 saved_score = sample.get("overall_score", 3)
 
 overall_score = st.slider(
@@ -437,70 +316,45 @@ overall_score = st.slider(
 sample["expert_validation"] = expert_results
 sample["overall_score"] = overall_score
 
-# SAVE BUTTON
+# SAVE
 if st.button("Save Current Progress"):
 
     st.session_state.data[idx] = sample
-
     autosave()
-
     st.success("Progress saved!")
 
-# DONE BUTTON
 if st.button("Save Sample as DONE"):
 
     sample["status"] = "done"
-
     st.session_state.data[idx] = sample
-
     autosave()
-
     st.success("Saved as DONE!")
 
-# BACKUP RESTORE
+# BACKUP
 st.sidebar.header("Backup Restore")
 
-uploaded = st.sidebar.file_uploader(
-    "Upload backup JSON",
-    type=["json"]
-)
+uploaded = st.sidebar.file_uploader("Upload backup JSON", type=["json"])
 
 if uploaded:
 
     restored_data = json.load(uploaded)
-
     st.session_state.data = restored_data
-
     autosave()
-
     st.sidebar.success("Backup restored!")
-
     st.rerun()
 
-# DOWNLOAD BACKUP
 st.sidebar.header("Download Backup")
-
-backup_json = json.dumps(
-    st.session_state.data,
-    indent=2,
-    ensure_ascii=False
-)
 
 st.sidebar.download_button(
     "Download Progress Backup",
-    data=backup_json,
+    data=json.dumps(st.session_state.data, indent=2, ensure_ascii=False),
     file_name="domain_expert_progress.json",
     mime="application/json"
 )
 
-# FINAL DOWNLOAD
 st.download_button(
     "Download FINAL RESULTS",
-    json.dumps(
-        st.session_state.data,
-        indent=2,
-        ensure_ascii=False
-    ),
+    data=json.dumps(st.session_state.data, indent=2, ensure_ascii=False),
     file_name="final_domain_expert_results.json",
     mime="application/json"
 )
